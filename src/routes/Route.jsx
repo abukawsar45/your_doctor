@@ -6,6 +6,12 @@ import Contact from './../components/Contact/Contact';
 import Medicine from '../components/Medicine/Medicine';
 import Test from '../components/Test/Test';
 import Dental from '../components/Dental/Dental';
+import Login from '../components/Login/Login';
+import Register from '../components/Register/Register';
+
+import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
+import MyBooking from './../components/MyBooking/MyBooking';
+import Booking from '../components/Booking/Booking';
 
 
 const router = createBrowserRouter([
@@ -15,29 +21,51 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home/>
+        element: <Home />,
       },
       {
-        path:'/about',
-        element: <About/>
+        path: '/about',
+        element: <About />,
       },
       {
         path: '/test',
-        element: <Test/>
+        element: <Test />,
       },
       {
         path: '/dental',
-        element: <Dental/>
+        element: <Dental />,
       },
       {
         path: '/medicine',
-        element: <Medicine/>
+        element: <Medicine />,
       },
       {
         path: '/contact',
-        element: <Contact/>
-      }
-    ]
-  }
-])
+        element: <Contact />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: '/booking/:id',
+        element: <PrivateRoutes><Booking/> </PrivateRoutes>,
+        loader: ({ params }) => fetch(`http://localhost:8080/data/${params.id}`),
+      },
+      {
+        path: '/myBooking',
+        element: (
+          <PrivateRoutes>
+            <MyBooking />
+          </PrivateRoutes>
+        ),
+      },
+      
+    ],
+  },
+]);
 export default router;

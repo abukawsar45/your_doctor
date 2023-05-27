@@ -43,10 +43,23 @@ const CarouselPart = () => {
             >
               <img src={img.src} alt='' className='w-full' />
               <div className='absolute bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] w-full h-full'>
-                <h3 className='text-4xl font-serif text-white'>
-                  Most Popular Hospiter
-                </h3>
-                <p>Your first choice in this HOSPITAL</p>
+                <div className='text-center md:text-left  md:mx-5 w-full md:w-1/3 '>
+                  <h3 className='text-4xl font-bold my-4 mx-auto text-white'>
+                    Most Popular Hospiter
+                  </h3>
+                  <p className='text-green-400 text-2xl mt-2 md:mt-4'>
+                    Your first choice in this HOSPITAL
+                  </p>
+                  <p className='text-sky-500'>
+                    <span>
+                      Because we are patients support 24hours/7days.
+                      <br />
+                      You can book an online doctor appointment at Apollo
+                      Hospitals. Click the button below to submit the doctor
+                      appointment form.
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
           ))}

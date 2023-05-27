@@ -1,9 +1,25 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
+import { useContext } from "react";
 
 import { FaStumbleuponCircle } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProviders";
 
 const Header = () => {
+  const { user, logout } = useContext(AuthContext);
+  
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        localStorage.removeItem('doctor-access-token')
+      })
+    .then((error) => {
+      console.log(error)
+    })
+  }
+
+
+  console.log(user)
   return (
     <div>
       <Navbar fluid={true} rounded={true}>
@@ -31,16 +47,15 @@ const Header = () => {
                 name@flowbite.com
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            
+       
+         
           </Dropdown>
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
-          <Link to='/'> <Navbar.Link>
+          <div className="md:flex items-center gap-6">
+            <Link to='/'> <Navbar.Link>
             Home
           </Navbar.Link>
           </Link>
@@ -48,7 +63,19 @@ const Header = () => {
           <Link Link to='/test'> <Navbar.Link >Medical Test</Navbar.Link></Link>
           <Link Link to='/dental'> <Navbar.Link >Dental</Navbar.Link></Link>
             <Link Link to='/medicine'> <Navbar.Link >Medincine</Navbar.Link></Link>
-          <Link Link to='/contact'> <Navbar.Link >Contact</Navbar.Link></Link>
+          {
+            user ? <>
+              <Link Link to='/myBooking'> <Navbar.Link >My Booking</Navbar.Link></Link>
+              <Button onClick={handleLogout}>Logout</Button>
+            </>
+              :
+              <>
+              <Link Link to='/register'> <Navbar.Link >Register</Navbar.Link></Link>
+              <Link Link to='/login'> <Navbar.Link >Login</Navbar.Link></Link>
+              
+              </>
+          }
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </div>
