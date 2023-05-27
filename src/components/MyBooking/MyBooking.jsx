@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const MyBooking = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   console.log(user)
   const [bookings, setBookings] = useState([])
   console.log(bookings)
@@ -74,7 +74,14 @@ const MyBooking = () => {
         }
         else
         {
-          navigate('/')
+          navigate('/login')
+           logout()
+             .then(() => {
+               localStorage.removeItem('doctor-access-token');
+             })
+             .then((error) => {
+               console.log(error);
+             });
         }
       });
   },[url])

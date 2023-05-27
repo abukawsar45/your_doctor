@@ -3,6 +3,16 @@ import { AuthContext } from "../Providers/AuthProviders";
 
 const SocialLink = () => {
   const { googleSignIn } = useContext(AuthContext);
+  const handleGooleSignIn = () => {
+    googleSignIn()
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch(error => {
+      console.log(error.message);
+    })
+  }
   return (
     <div className='text-center'>
       <button onClick={handleGooleSignIn}

@@ -21,33 +21,14 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log({ email, password })
-    // navigate(from ,{replace: true})
     login(email, password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-
-        const validUser = {
-          email: loggedUser.email,
-        };
-        fetch('http://localhost:8080/jwt', {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(validUser)
-        })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            // warning: LocalStorage is not best policy
-            localStorage.setItem('doctor-access-token', data.token)
-          });
-        console.log({validUser})
         setError('');
         setSuccess('Login successful');
         form.reset();
-
+        navigate(from ,{replace: true})
       })
       .catch((error) => {
         console.log(error.message);
